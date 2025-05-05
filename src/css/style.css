@@ -1,0 +1,23 @@
+:root {
+  --borderSize: 3px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app {
+  width: 100vw;
+  height: 100vh;
+}
+
+.goomba {
+  position: absolute;
+  background-image: url('./img/goomba_right.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
