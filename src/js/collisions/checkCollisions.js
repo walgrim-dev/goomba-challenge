@@ -26,8 +26,8 @@ function rectsOverlap(x1, y1, w1, h1, x2, y2, w2, h2) {
  * @param y1
  * @param w1
  * @param h1
- * @param {DefaultObstacle[]} obstacleList
- * @returns {DefaultObstacle|null}
+ * @param {GoombaObstacle[]} obstacleList
+ * @returns {GoombaObstacle|null}
  */
 function objectColliding(x1, y1, w1, h1, obstacleList) {
     for (let obstacle of obstacleList) {

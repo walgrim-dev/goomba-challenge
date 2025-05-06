@@ -2,6 +2,7 @@ import {objectColliding} from "../collisions/checkCollisions.js";
 import Coordinates from "../tile/coordinates/Coordinates.js";
 import {ScaleFactor} from "../scale/ScaleFactor.js";
 import LevelManager from "../manager/LevelManager.js";
+import GoombaManager from "../manager/GoombaManager.js";
 
 export default class Player {
     /**
@@ -22,6 +23,8 @@ export default class Player {
         this.size = ScaleFactor.PLAYER_SIZE;
         this.listenToKeys();
         this.createPlayer();
+        this.goombaManager = new GoombaManager();
+        this.lives = 3;
         //this.loaded = true
     }
 
@@ -72,19 +75,19 @@ export default class Player {
     }
 
     /**
-     * @returns {DefaultObstacle|null} obstacle
+     * @returns {GoombaObstacle|null} obstacle
      */
+
     isColliding() {
         return objectColliding(
             this.coordinates.x,
             this.coordinates.y,
             this.size,
             this.size,
-            new LevelManager().getCurrentLevel().getGoombas());
+            this.goombaManager.getActiveGoombas());
     }
 
     move(delta) {
-        console.log(new LevelManager().getCurrentLevel().getGoombas());
         if (this.isMoving()) {
             // Tileinfo
             if (this.moves.left) {
@@ -110,11 +113,16 @@ export default class Player {
                 }*/
             }
             this.element.style.left = `${this.coordinates.x}px`;
-            return;
         }
         const collidingObstacle = this.isColliding();
         if (collidingObstacle) {
-            alert("Collision with obstacle");
+            collidingObstacle.deleteElement();
+            this.goombaManager.makeActiveInactiveGoomba(collidingObstacle);
+            this.lives--;
         }
+    }
+
+    getPlayerLives() {
+        return this.lives;
     }
 }

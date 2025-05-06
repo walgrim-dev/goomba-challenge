@@ -2,7 +2,7 @@ import LevelDesign from "./LevelDesign.js";
 
 export class FifthLevel extends LevelDesign {
     constructor() {
-        super(10, 247.5, 247.5);
+        super(200, 15.0, 7.0);
     }
 
     nextLevel = () => {

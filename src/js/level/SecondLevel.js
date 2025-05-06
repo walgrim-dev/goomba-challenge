@@ -3,7 +3,7 @@ import {ThirdLevel} from "./ThirdLevel.js";
 
 export class SecondLevel extends LevelDesign {
     constructor() {
-        super(10, 247.5, 247.5);
+        super(50, 10, 5.0);
     }
     nextLevel = () => {
         return new ThirdLevel();

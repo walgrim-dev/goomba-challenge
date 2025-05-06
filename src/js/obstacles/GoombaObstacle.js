@@ -1,5 +1,6 @@
 import DefaultObstacle from "./DefaultObstacle.js";
 import {ScaleFactor} from "../scale/ScaleFactor.js";
+import GoombaManager from "../manager/GoombaManager.js";
 
 export default class GoombaObstacle extends DefaultObstacle {
     /**
@@ -11,12 +12,14 @@ export default class GoombaObstacle extends DefaultObstacle {
     constructor(x, y, vx, vy) {
         super(x, y, vx, vy, ScaleFactor.GOOMBA_SIZE);
         this.element = document.createElement('div');
+        this.goombaManager = new GoombaManager();
     }
 
     move = (delta) => {
         super.move(delta);
         if (this.coordinates.y > window.innerHeight) {
-            this.element.remove();
+            this.goombaManager.makeActiveInactiveGoomba(this);
+            this.deleteElement();
             return;
         }
         this.element.style.top = `${this.coordinates.y}px`;
@@ -30,5 +33,9 @@ export default class GoombaObstacle extends DefaultObstacle {
         this.element.style.top = `${this.coordinates.y}px`;
         this.element.style.left = `${this.coordinates.x}px`;
         document.querySelector('#app').append(this.element);
+    }
+
+    deleteElement() {
+        this.element.remove();
     }
 }

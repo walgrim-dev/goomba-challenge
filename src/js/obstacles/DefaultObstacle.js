@@ -20,9 +20,10 @@ export default class DefaultObstacle {
         if (this.coordinates.x < 0 || this.coordinates.x > window.innerWidth - this.size) {
             this.coordinates.vx = -this.coordinates.vx;
         }
+        /*
         if (this.coordinates.y < 0) {
             this.coordinates.vy = -this.coordinates.vy;
-        }
+        }*/
         this.coordinates.x += this.coordinates.vx;
         this.coordinates.y += this.coordinates.vy;
     }

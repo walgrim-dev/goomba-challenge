@@ -4,7 +4,7 @@ import {FourthLevel} from "./FourthLevel.js";
 
 export class ThirdLevel extends LevelDesign {
     constructor() {
-        super(10, 247.5, 247.5);
+        super(100, 12.0, 7.0);
     }
 
     nextLevel = () => {
