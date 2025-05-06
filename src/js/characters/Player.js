@@ -153,6 +153,13 @@ export default class Player {
     }
 
     move(delta) {
+        const collidingObstacle = this.isColliding();
+        if (collidingObstacle) {
+            collidingObstacle.deleteElement();
+            this.goombaManager.makeActiveInactiveGoomba(collidingObstacle);
+            this.lives--;
+            this.updateLifeCounter();
+        }
         if (this.isMoving()) {
             if (this.moves.left) {
                 if (this.coordinates.x - this.coordinates.vx < 0) {
@@ -167,13 +174,6 @@ export default class Player {
                 this.coordinates.x += this.coordinates.vx;
             }
             this.element.style.left = `${this.coordinates.x}px`;
-        }
-        const collidingObstacle = this.isColliding();
-        if (collidingObstacle) {
-            collidingObstacle.deleteElement();
-            this.goombaManager.makeActiveInactiveGoomba(collidingObstacle);
-            this.lives--;
-            this.updateLifeCounter();
         }
     }
 
