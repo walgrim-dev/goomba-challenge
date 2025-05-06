@@ -1,5 +1,4 @@
 import Coordinates from "../tile/coordinates/Coordinates.js";
-import {ActionType} from "../action/Action.js";
 
 export default class DefaultObstacle {
     /**
@@ -7,13 +6,11 @@ export default class DefaultObstacle {
      * @param {float} y Y coordinate of the obstacle
      * @param {float} vx X velocity of the obstacle
      * @param {float} vy Y velocity of the obstacle
-     * @param {ActionType} action Action of the obstacle
      * @param {number} size Size of the obstacle
      */
 
-    constructor(x, y, vx, vy, action, size) {
+    constructor(x, y, vx, vy, size) {
         this.coordinates = new Coordinates(x, y, vx, vy);
-        this.action = action;
         this.size = size;
     }
 

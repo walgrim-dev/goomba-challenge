@@ -7,17 +7,17 @@ export default class GoombaObstacle extends DefaultObstacle {
      * @param {float} y Y coordinate of the obstacle
      * @param {float} vx X velocity of the obstacle
      * @param {float} vy Y velocity of the obstacle
-     * @param {string} action Action of the obstacle
      */
-    constructor(x, y, vx, vy, action) {
-        super(x, y, vx, vy, action, ScaleFactor.GOOMBA_SIZE);
+    constructor(x, y, vx, vy) {
+        super(x, y, vx, vy, ScaleFactor.GOOMBA_SIZE);
         this.element = document.createElement('div');
     }
 
-    move(delta) {
+    move = (delta) => {
         super.move(delta);
-        if (parseInt(this.element.style.bottom) < 0) {
+        if (this.coordinates.y > window.innerHeight) {
             this.element.remove();
+            return;
         }
         this.element.style.top = `${this.coordinates.y}px`;
         this.element.style.left = `${this.coordinates.x}px`;

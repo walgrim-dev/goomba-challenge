@@ -8,11 +8,41 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  background-image: url("./img/background.jpg");
+  background-repeat: repeat;
+  animation: slideBackground 20s linear infinite;
 }
 
-.app {
+@keyframes slideBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+
+#app {
   width: 100vw;
   height: 100vh;
+}
+
+#ground {
+  position: absolute;
+  background-image: url('./img/block.png');
+  background-repeat: repeat;
+  top: 67vh;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.player {
+  position: absolute;
+  background-image: url('./img/mario.png');
+  background-repeat: no-repeat;
+  z-index: 2;
 }
 
 .goomba {
@@ -20,4 +50,5 @@ body {
   background-image: url('./img/goomba_right.png');
   background-repeat: no-repeat;
   background-size: cover;
+  z-index: -1;
 }

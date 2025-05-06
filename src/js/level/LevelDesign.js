@@ -1,6 +1,3 @@
-import {ActionType} from "../action/Action.js";
-import {ScaleFactor} from "../scale/ScaleFactor.js";
-import WallObstacle from "../obstacles/GoombaObstacle.js";
 import GoombaObstacle from "../obstacles/GoombaObstacle.js";
 
 export default class LevelDesign {
@@ -26,7 +23,7 @@ export default class LevelDesign {
             const y = Math.random() * window.innerHeight/3;
             const vx = Math.random() * maxVel - Math.random() * minVel;
             const vy = Math.random() * maxVel + Math.random() * minVel;
-            const goomba = new GoombaObstacle(x, y, vx, vy, ActionType.MOVE);
+            const goomba = new GoombaObstacle(x, y, vx, vy);
             this.goombas.push(goomba);
         }
     }
