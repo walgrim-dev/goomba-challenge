@@ -16,7 +16,8 @@ export default class GameEngine {
     play = (time) => {
         this.player.move(time);
         if (this.player.getPlayerLives() <= 0) {
-            alert("Game Over");
+            window.location.href = '/goomba-challenge/pages/gameOver.html';
+            return;
         }
         const activeGoombas = this.goombaManager.getActiveGoombas();
         const goombasToMove = activeGoombas.slice(0, 10);

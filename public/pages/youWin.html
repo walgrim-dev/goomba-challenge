@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victoire ! - Goomba Challenge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #5c94fc;
+            font-family: 'Press Start 2P', cursive;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 4px solid #ffd700;
+            box-shadow: 0 0 20px #ffd700;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #FFC800;
+            margin-bottom: 2rem;
+            text-shadow: 3px 3px 0 #000;
+            animation: rainbow 4s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% { color: #FF0000; }
+            17% { color: #FF8000; }
+            33% { color: #FFFF00; }
+            50% { color: #00FF00; }
+            67% { color: #00FFFF; }
+            83% { color: #0080FF; }
+            100% { color: #FF0000; }
+        }
+
+        .message {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: white;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .restart-btn {
+            background-color: #e52521;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Press Start 2P', cursive;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 6px 0 #8b0000;
+            margin-top: 20px;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(2px);
+            box-shadow: 0 4px 0 #8b0000;
+            background-color: #cc0000;
+        }
+
+        .restart-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0 0 0 #8b0000;
+        }
+
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: explode 2s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0) scale(0.1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(0, 0) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .stars {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle-and-fall 3s ease-in infinite;
+            top: -10px;
+        }
+
+        @keyframes twinkle-and-fall {
+            0% {
+                opacity: 0;
+                transform: translateY(0);
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh);
+            }
+        }
+
+        .victory-icon {
+            font-size: 60px;
+            color: #ffd700;
+            text-shadow: 3px 3px 0 #cc0000;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+<div class="stars" id="stars-container"></div>
+<div class="fireworks" id="fireworks-container"></div>
+<div class="container">
+    <div class="victory-icon">★</div>
+    <h1>BRAVO !</h1>
+    <div class="message">Vous avez vaincu tous les Goombas !</div>
+    <div class="message">Le Royaume Champignon est sauvé !</div>
+    <button class="restart-btn" onclick="restartGame()">REJOUER</button>
+</div>
+
+<script>
+    // Animation des feux d'artifice simplifiée
+    function createFirework() {
+        const fireworksContainer = document.getElementById('fireworks-container');
+        const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#FFFFFF'];
+
+        const x = Math.random() * window.innerWidth;
+        const y = window.innerHeight * (0.3 + Math.random() * 0.5);
+        const color = colors[Math.floor(Math.random() * colors.length)];
+
+        // Créer l'explosion
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'firework';
+            particle.style.left = `${x + (Math.random() * 100 - 50)}px`;
+            particle.style.top = `${y + (Math.random() * 100 - 50)}px`;
+            particle.style.backgroundColor = color;
+
+            fireworksContainer.appendChild(particle);
+
+            // Supprimer après l'animation
+            setTimeout(() => {
+                particle.remove();
+            }, 2000);
+        }
+    }
+
+    // Création d'étoiles qui tombent
+    function createStars() {
+        const starsContainer = document.getElementById('stars-container');
+
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = `${Math.random() * 100}%`;
+
+            // Délai différent pour chaque étoile
+            star.style.animationDelay = `${Math.random() * 3}s`;
+            star.style.animationDuration = `${3 + Math.random() * 7}s`;
+
+            starsContainer.appendChild(star);
+        }
+    }
+
+    // Redémarrer le jeu
+    function restartGame() {
+        window.location.href = '../index.html';
+    }
+
+    // Initialisation
+    document.addEventListener('DOMContentLoaded', () => {
+        // Créer des feux d'artifice à intervalles réguliers
+        setInterval(createFirework, 800);
+        createStars();
+    });
+</script>
+</body>
+</html>

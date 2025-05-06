@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Over - Goomba Challenge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #5c94fc;
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+            background-image: url("/goomba-challenge/img/background.jpg");
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 4px solid #ffd700;
+            box-shadow: 0 0 20px #ffd700;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ff0000;
+            margin-bottom: 2rem;
+            text-shadow: 3px 3px 0 #000;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #ffd700;
+        }
+
+        .restart-btn {
+            background-color: #e52521;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Press Start 2P', cursive;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 6px 0 #8b0000;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(2px);
+            box-shadow: 0 4px 0 #8b0000;
+            background-color: #cc0000;
+        }
+
+        .restart-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0 0 0 #8b0000;
+        }
+
+        .goomba {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-image: url("/goomba-challenge/img/goomba_right.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.7;
+            animation: float 3s infinite alternate;
+        }
+
+        @keyframes float {
+            from { transform: translateY(0) rotate(0deg); }
+            to { transform: translateY(20px) rotate(10deg); }
+        }
+
+        .pixel-border {
+            border: 4px solid;
+            border-color: #ffd700 #916f00 #916f00 #ffd700;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        .mario-death {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background-image: url("https://upload.wikimedia.org/wikipedia/commons/4/47/Mario_jump.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: death-animation 2s infinite;
+        }
+
+        @keyframes death-animation {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+            100% { transform: translateY(5px); }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>GAME OVER</h1>
+    <div class="mario-death"></div>
+    <p>Les Goombas vous ont eu !</p>
+    <div class="pixel-border">
+        <button class="restart-btn" onclick="restartGame()">Rejouer</button>
+    </div>
+</div>
+
+<script>
+    // Créer des goombas flottants en arrière-plan
+    function createFloatingGoombas() {
+        const numGoombas = 10;
+        const container = document.body;
+
+        for (let i = 0; i < numGoombas; i++) {
+            const goomba = document.createElement('div');
+            goomba.classList.add('goomba');
+
+            // Position aléatoire
+            const randomX = Math.random() * window.innerWidth;
+            const randomY = Math.random() * window.innerHeight;
+
+            goomba.style.left = `${randomX}px`;
+            goomba.style.top = `${randomY}px`;
+
+            // Animation légèrement différente pour chaque goomba
+            const delay = Math.random() * 2;
+            const duration = 3 + Math.random() * 2;
+            goomba.style.animationDelay = `${delay}s`;
+            goomba.style.animationDuration = `${duration}s`;
+
+            container.appendChild(goomba);
+        }
+    }
+
+    function restartGame() {
+        window.location.href = '/goomba-challenge/index.html';
+    }
+
+    // Initialisation
+    document.addEventListener('DOMContentLoaded', createFloatingGoombas);
+</script>
+</body>
+</html>

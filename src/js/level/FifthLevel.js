@@ -6,6 +6,6 @@ export class FifthLevel extends LevelDesign {
     }
 
     nextLevel = () => {
-        alert("Congratulations! You have completed all level!");
+        window.location.href = '/goomba-challenge/pages/youWin.html';
     }
 }
