@@ -8,7 +8,7 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-image: url("./img/background.jpg");
+  background-image: url("/goomba-challenge/img/background.jpg");
   background-repeat: repeat;
   animation: slideBackground 20s linear infinite;
 }
@@ -29,7 +29,7 @@ body {
 
 #ground {
   position: absolute;
-  background-image: url('./img/block.png');
+  background-image: url('/goomba-challenge/img/block.png');
   background-repeat: repeat;
   top: 67vh;
   z-index: 1;
@@ -40,14 +40,14 @@ body {
 
 .player {
   position: absolute;
-  background-image: url('./img/mario.png');
+  background-image: url('/goomba-challenge/img/mario.png');
   background-repeat: no-repeat;
   z-index: 2;
 }
 
 .goomba {
   position: absolute;
-  background-image: url('./img/goomba_right.png');
+  background-image: url('/goomba-challenge/img/goomba_right.png');
   background-repeat: no-repeat;
   background-size: cover;
   z-index: -1;
