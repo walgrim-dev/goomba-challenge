@@ -87,20 +87,28 @@ export default class Player {
         if (this.isMoving()) {
             // Tileinfo
             if (this.moves.left) {
-                const speedFactor = (this.moves.up || this.moves.down) ? 0.7 : 1;
+                if (this.coordinates.x - this.coordinates.vx < 0) {
+                    return;
+                }
                 this.coordinates.x -= this.coordinates.vx;
+                /*
                 const collidingObstacle = this.isColliding();
                 if (collidingObstacle) {
                     alert("Collision with obstacle");
-                }
+                }*/
             }
             if (this.moves.right) {
+                if (this.coordinates.x > window.innerWidth - this.size) {
+                    return;
+                }
                 this.coordinates.x += this.coordinates.vx;
+                /*
                 const collidingObstacle = this.isColliding();
                 if (collidingObstacle) {
                     alert("Collision with obstacle");
-                }
+                }*/
             }
+            this.element.style.left = `${this.coordinates.x}px`;
             return;
         }
         const collidingObstacle = this.isColliding();
