@@ -84,6 +84,7 @@ export default class Player {
     }
 
     move(delta) {
+        console.log(new LevelManager().getCurrentLevel().getGoombas());
         if (this.isMoving()) {
             // Tileinfo
             if (this.moves.left) {
